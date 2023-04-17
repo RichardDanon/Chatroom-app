@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('chatUsers', function (Blueprint $table) {
             $table->increments('id');
             $table->binary('image')->nullable();
             $table->string('firstName');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('chatUsers');
     }
 };

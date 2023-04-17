@@ -21,12 +21,12 @@ return new class extends Migration
 
             $table->foreign('receivers_id')
                     ->references('id')
-                    ->on('users')
+                    ->on('chatUsers')
                     ->onCascade('delete');
 
             $table->foreign('senders_id')
                     ->references('id')
-                    ->on('users')
+                    ->on('chatUsers')
                     ->onCascade('delete');
         });
     }
