@@ -6,36 +6,16 @@
     use App\Models\ChatUser;
     use App\Models\Message;
 
-    class ChatRoomController extends Controller
+    /*
+        Message Controller
+
+        getMessage(by sender)
+
+        setMessage(send message)
+    */
+
+    class ChatUserController extends Controller
     {
-        public function setChatUser(Request $request){
-            $fields = $request->validate([
-                'image'         => 'image|nullable|max:1999',
-                'firstName' => 'required|string',
-                'lastName' => 'required|string',
-                'email' => 'required|string',
-                'username' => 'required|string',
-                'password' => 'required|string',
-            ]);
-            $chatUser = ChatUser::create([
-                'image'        => $fields['image'],
-                'firstName'        => $fields['firstName'],
-                'lastName'        => $fields['lastName'],
-                'email' => $fields['email'],
-                'username' => $fields['username'],
-                'password' => $fields['password']
-            ]);
-    
-            return response($chatUser, 201);
-        }
-    
-        public function getChatUser($username,$password){
-            $chatUser = ChatUser::where('username', 'LIKE', '%'.$username.'%')
-            ->orWhere('description', 'LIKE', '%'.$search.'%')
-            ->get();
-            return response($chatUser, 201);
-        }
-    
         public function setItem(Request $request){
             $fields = $request->validate([
                 'name'          => 'required|string',
@@ -92,6 +72,5 @@
             }
             return response([],201);
         }
-
     }
 ?>
