@@ -29,9 +29,11 @@
             return response($chatUser, 201);
         }
     
-        public function getChatUser(){
-            $arryCategories = Category::all();
-            return response($arryCategories, 201);
+        public function getChatUser($username,$password){
+            $chatUser = ChatUser::where('username', 'LIKE', '%'.$username.'%')
+            ->orWhere('description', 'LIKE', '%'.$search.'%')
+            ->get();
+            return response($chatUser, 201);
         }
     
         public function setItem(Request $request){
