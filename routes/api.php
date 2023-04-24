@@ -20,7 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/ext/setChatUser',[PageController::class,'setChatUser']);
 Route::get('/ext/getChatUser',[PageController::class,'getChatUser']);
-//Route::update('/ext/putChatUser',[PageController::class,'putChatUser']);
+Route::put('/ext/putChatUser',[PageController::class,'putChatUser']);
+Route::delete('/ext/deleteChatUser',[PageController::class,'deleteChatUser']);
+
 
 Route::post('/ext/setMessage',[PageController::class,'setMessage']);
 Route::get('/ext/getMessage',[PageController::class,'getMessage']);

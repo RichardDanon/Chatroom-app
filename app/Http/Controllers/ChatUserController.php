@@ -37,17 +37,57 @@
             return response($chatUser, 201);
         }
 
-        public function getChatUser($username,$email){
-            $chatUser = ChatUser::where(function($query)use($username,$email){
-                $query->where('username', 'LIKE', '%'.$username.'%')
-                ->where('email', 'LIKE', '%'.$email.'%');
-            })
+        public function getChatUser($username){
+            $chatUsers = ChatUser::where('username', '=', '%'.$username.'%')
             ->get();
+
+            if(!$chatUsers[0]){
+                return response()->json(['message' => 'ChatUser not found'], 404);
+            }
+
             return response($chatUser, 201);
         }
 
-        public function putChatUser($username,$email){
+        public function putChatUser($username, Request $request){
+            $fields = $request->validate([
+                'image' => 'image|nullable|max:1999',
+                'firstName' => 'required|string',
+                'lastName' => 'required|string',
+                'email' => 'required|string',
+                'username' => 'required|string',
+                'password' => 'required|string',
+            ]);
 
+            $chatUsers = ChatUser::where('username', '=', '%'.$username.'%')
+                    ->get();
+
+            if(!$chatUsers[0]){
+                return response()->json(['message' => 'ChatUser not found'], 404);
+            }
+
+            foreach($chatUsers as $chatuser){
+                $chatuser->image=$request->image;
+                $chatuser->firstName=$request->firstName;
+                $chatuser->lastName=$request->lastName;
+                $chatUser->email=$request->email;
+                $chatUser->username=$request->username;
+                $chatUser->password=$request->password;
+            }
+
+            $chatUsers[0]->save();
+
+            return response($chatUsers[0],201);
+        }
+
+        public function deleteChatUser($username){
+            $chatUsers = ChatUser::where('username', '=', '%'.$username.'%')
+            ->get();
+
+            if(!$chatUsers[0]){
+                return response()->json(['message' => 'ChatUser not found'], 404);
+            }
+
+            $chatUsers[0]->delete();
         }
     }
 ?>
