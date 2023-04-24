@@ -37,13 +37,17 @@
             return response($chatUser, 201);
         }
 
-        public function getChatUser($username,$password){
-            $chatUser = ChatUser::where(function($query){
+        public function getChatUser($username,$email){
+            $chatUser = ChatUser::where(function($query)use($username,$email){
                 $query->where('username', 'LIKE', '%'.$username.'%')
                 ->where('email', 'LIKE', '%'.$email.'%');
             })
             ->get();
             return response($chatUser, 201);
+        }
+
+        public function putChatUser($username,$email){
+
         }
     }
 ?>
