@@ -16,11 +16,13 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->increments('id');
-            $table->unsignedInteger('chat_user_id');
+            $table->unsignedInteger('sender_id');
+            $table->unsignedInteger('receiver_id');
             $table->unsignedInteger('message_id');
             $table->timestamps();
 
-            $table->foreign('chat_user_id')->references('id')->on('chatUsers');
+            $table->foreign('sender_id')->references('id')->on('chatUsers');
+            $table->foreign('receiver_id')->references('id')->on('chatUsers');
             $table->foreign('message_id')->references('id')->on('messages');
         });
     }
