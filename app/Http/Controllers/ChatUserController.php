@@ -38,10 +38,8 @@
         }
 
         public function getChatUser($username,$password){
-            $chatUser = ChatUser::where(function($query){
-                $query->where('username', 'LIKE', '%'.$username.'%')
-                ->where('email', 'LIKE', '%'.$email.'%');
-            })
+            $chatUser = ChatUser::where('username', 'LIKE', '%'.$username.'%','AND','')
+            ->orWhere('description', 'LIKE', '%'.$search.'%')
             ->get();
             return response($chatUser, 201);
         }
