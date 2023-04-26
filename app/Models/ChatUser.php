@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
-class ChatUser extends Model //like category
+class Chatuser extends Model //like category
 {
     use HasFactory;
 

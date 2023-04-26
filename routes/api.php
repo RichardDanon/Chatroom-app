@@ -20,10 +20,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/ext/setChatUser',[ChatUserController::class,'setChatUser']);
-Route::get('/ext/getChatUser',[ChatUserController::class,'getChatUser']);
-Route::put('/ext/putChatUser',[ChatUserController::class,'putChatUser']);
-Route::delete('/ext/deleteChatUser',[ChatUserController::class,'deleteChatUser']);
+Route::get('/users', [ChatUserController::class, 'getUsers']);
+Route::post('/users', [ChatUserController::class, 'postUser']);
+Route::get('/users/{id}', [ChatUserController::class, 'getUsersById']);
+Route::post('/users/login', [ChatUserController::class, 'userLogin']);
 
 
 Route::post('/ext/setMessage',[MessageController::class,'setMessage']);
@@ -32,4 +32,13 @@ Route::get('/ext/getMessage/{searchId}', [MessageController::class, 'getMessageB
 //Route::update('/ext/putMessage',[PageController::class,'putMessage']);
 //Route::delete('/ext/deleteMessage',[PageController::class,'deleteMessage']);
 
+
+Route::get('/messages', [MessageController::class, 'getMessages']);
+Route::get('/messages/{id}', [MessageController::class, 'getMessagesById']);
+Route::get('/messages/users/{user_one_id}&&{user_two_id}', [PageController::class, 'getRecentMessages']) //gonna be the third controller 
+->withoutMiddleware('throttle:api')
+    ->middleware('throttle:500:1');
+Route::post('/messages', [MessageController::class, 'postMessage']);
+
+//comment messages out if you need to to test the users
 

@@ -16,7 +16,63 @@
 
     class ChatUserController extends Controller
     {
-        public function setChatUser(Request $request){
+        public function postUser(Request $request)
+        {
+            $fields = $request->validate([
+                'username' => 'required|string',
+                'firstName' => 'required|string',
+                'lastName' => 'required|string',
+                'image' => 'nullable|string',
+                'email' => 'required|string',
+                'password' => 'required|string',
+            ]);
+            $user = ChatUser::create([
+                'username' => $fields['username'],
+                'first_name' => $fields['firstName'],
+                'last_name' => $fields['lastName'],
+                'image' => empty($fields['image']) ? null : $fields['image'], //check if null works remove and keep field
+                'email' => $fields['email'],
+                'password' => md5($fields['password'])
+            ]);
+            return response($user, 201);
+        }
+    
+    
+        public function getUsers()
+        {
+            $arrUsers = ChatUser::all();
+            //remove password for each
+            foreach ($arrUsers as $user) {
+                unset($user['password']);
+            }
+    
+            return response($arrUsers, 200);
+        }
+    
+    
+        public function getUsersById($id)
+        {
+            $user = Chatuser::where('id', $id)
+                ->first();
+    
+    
+            unset($user['password']);
+    
+            return response($user, 200);
+        }
+    
+        public function userLogin(Request $request)
+        {
+            $fields = $request->validate([
+                'username' => 'required|string',
+                'password' => 'required|string',
+            ]);
+            $user = Chatuser::where('username', $fields['username'])
+                ->where('password', md5($fields['password']))
+                ->first();
+            return response($user, 200);
+        }
+ /*       public function setChatUser(Request $request){
             $fields = $request->validate([
                 'image' => 'image|nullable|max:1999',
                 'firstName' => 'required|string',
@@ -105,6 +161,6 @@
                 $chatUsers[0]->delete();
 
                 return response()->json([], 204);
-        }
+        }*/
     }
 ?>
