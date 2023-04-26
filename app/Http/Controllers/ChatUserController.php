@@ -45,7 +45,7 @@
                 return response()->json(['message' => 'ChatUser not found'], 404);
             }
 
-            return response($chatUser, 201);
+            return response($chatUsers, 201); //added s (plural) (thats how you named it here)
         }
 
         public function putChatUser($username, Request $request){
@@ -69,9 +69,9 @@
                 $chatuser->image=$request->image;
                 $chatuser->firstName=$request->firstName;
                 $chatuser->lastName=$request->lastName;
-                $chatUser->email=$request->email;
-                $chatUser->username=$request->username;
-                $chatUser->password=$request->password;
+                $chatUsers->email=$request->email;  //added s bc there was an error
+                $chatUsers->username=$request->username; //same thing
+                $chatUsers->password=$request->password; //same thing
             }
 
             $chatUsers[0]->save();
