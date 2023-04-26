@@ -27,12 +27,22 @@ class MessageController extends Controller
     //get all
     public function getMessage(){
         $arrayMessage = Message::all();
-        return response($arrayMessage,201);
+        return response($arrayMessage,200);
     }
     //get one
     public function getMessageById($searchId){
-        $singleMessage = Message::where('id', 'LIKE', '%'.$searchId.'%')
-        ->get();
-        return response($singleMessage, 201);
+        $singleMessage = Message::where('id', $searchId)
+        ->first();
+        return response($singleMessage, 200);
     }
+    // public function getUsersById($id)
+    // {
+    //     $user = Chatuser::where('id', $id)
+    //         ->first();
+
+
+    //     unset($user['password']);
+
+    //     return response($user, 200);
+    // }
 }
