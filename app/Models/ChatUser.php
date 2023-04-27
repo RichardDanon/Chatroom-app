@@ -20,8 +20,4 @@ class Chatuser extends Model //like category
         'password',
     ];
 
-    public function messages(): HasMany
-    {
-        return $this->hasMany(Message::class);
-    }
 }

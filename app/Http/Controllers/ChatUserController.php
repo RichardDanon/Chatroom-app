@@ -19,28 +19,32 @@
         public function postUser(Request $request)
         {
             $fields = $request->validate([
-                'username' => 'required|string',
+                'image' => 'nullable|string',
                 'firstName' => 'required|string',
                 'lastName' => 'required|string',
-                'image' => 'nullable|string',
-                'email' => 'required|string',
+                'email' => 'required|email|unique:chatusers,email', // validate email is unique in chat_users table
+                'username' => 'required|string|unique:chatusers,username', // validate username is unique in chat_users table
                 'password' => 'required|string',
             ]);
-            $user = ChatUser::create([
-                'username' => $fields['username'],
-                'first_name' => $fields['firstName'],
-                'last_name' => $fields['lastName'],
-                'image' => empty($fields['image']) ? null : $fields['image'], //check if null works remove and keep field
+
+            $user = Chatuser::create([
+                'image' => empty($fields['image']) ? null : $fields['image'],
+                'firstName' => $fields['firstName'],
+                'lastName' => $fields['lastName'],
                 'email' => $fields['email'],
+                'username' => $fields['username'],
                 'password' => md5($fields['password'])
             ]);
+
+            unset($user['password']);
+            
             return response($user, 201);
         }
     
     
         public function getUsers()
         {
-            $arrUsers = ChatUser::all();
+            $arrUsers = Chatuser::all();
             //remove password for each
             foreach ($arrUsers as $user) {
                 unset($user['password']);
