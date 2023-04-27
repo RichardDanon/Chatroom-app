@@ -18,20 +18,20 @@
     {
         public function setChatUser(Request $request){
             $fields = $request->validate([
-                'image' => 'image|nullable|max:1999',
+                'image'     => 'image|nullable|max:1999',
                 'firstName' => 'required|string',
-                'lastName' => 'required|string',
-                'email' => 'required|string',
-                'username' => 'required|string',
-                'password' => 'required|string',
+                'lastName'  => 'required|string',
+                'email'     => 'required|string',
+                'username'  => 'required|string',
+                'password'  => 'required|string',
             ]);
             $chatUser = ChatUser::create([
-                'image'        => $fields['image'],
-                'firstName'    => $fields['firstName'],
-                'lastName'     => $fields['lastName'],
-                'email' => $fields['email'],
-                'username' => $fields['username'],
-                'password' => $fields['password']
+                'image'     => $fields['image'],
+                'firstName' => $fields['firstName'],
+                'lastName'  => $fields['lastName'],
+                'email'     => $fields['email'],
+                'username'  => $fields['username'],
+                'password'  => $fields['password']
             ]);
     
             return response($chatUser, 201);
