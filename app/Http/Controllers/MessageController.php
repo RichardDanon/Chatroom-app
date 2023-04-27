@@ -5,6 +5,10 @@
     use Illuminate\Http\Response;
     use App\Models\ChatUser;
     use App\Models\Message;
+    use App\Models\Chatusermessage;
+    use Carbon\Carbon;
+    
+    
 
     /*
         Message Controller
@@ -82,11 +86,10 @@
         }
     
     
-    public function getMessages()
-    {
-    $arrMessages = Chat_message::all(); // can comment out if needded not sure if it works (Not sure if its needed since i got recent messages)
-    return response($arrMessages, 200);
-    }
+      public function getMessage(){
+        $arrayMessage = Message::all();
+        return response($arrayMessage,201);
+    }   
     
     
     }
