@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
-class ChatUser extends Model
+class Chatuser extends Model //like category
 {
     use HasFactory;
 
@@ -20,8 +20,4 @@ class ChatUser extends Model
         'password',
     ];
 
-    public function messages(): HasMany
-    {
-        return $this->hasMany(Message::class);
-    }
 }
