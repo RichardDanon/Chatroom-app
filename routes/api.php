@@ -26,16 +26,16 @@ Route::get('/users/{id}', [ChatUserController::class, 'getUsersById']);
 Route::post('/users/login', [ChatUserController::class, 'userLogin']);
 
 
-Route::post('/ext/setMessage',[MessageController::class,'setMessage']);
-Route::get('/ext/getMessage',[MessageController::class,'getMessage']);
-Route::get('/ext/getMessage/{searchId}', [MessageController::class, 'getMessageById']);
+// Route::post('/ext/setMessage',[MessageController::class,'setMessage']);
+// Route::get('/ext/getMessage',[MessageController::class,'getMessage']);
+// Route::get('/ext/getMessage/{searchId}', [MessageController::class, 'getMessageById']);
 //Route::update('/ext/putMessage',[PageController::class,'putMessage']);
 //Route::delete('/ext/deleteMessage',[PageController::class,'deleteMessage']);
 
 
-Route::get('/messages', [MessageController::class, 'getMessages']);
+Route::get('/messages', [MessageController::class, 'getMessage']);
 Route::get('/messages/{id}', [MessageController::class, 'getMessagesById']);
-Route::get('/messages/users/{user_one_id}&&{user_two_id}', [PageController::class, 'getRecentMessages']) //gonna be the third controller 
+Route::get('/messages/users/{user_one_id}&&{user_two_id}', [MessageController::class, 'getRecentMessages']) //gonna be the third controller 
 ->withoutMiddleware('throttle:api')
     ->middleware('throttle:500:1');
 Route::post('/messages', [MessageController::class, 'postMessage']);

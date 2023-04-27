@@ -14,12 +14,12 @@ class Message extends Model //like items
     protected $fillable=[
         'body',
         'image',
-        'receivers_id',
-        'senders_id',
+        'receiver_id',
+        'sender_id',
     ];
 
-    public function chatUser(): BelongsTo
-    {
-        return $this->belongsTo(ChatUser::class);
-    }
+    // public function chatUser(): BelongsTo
+    // {
+    //     return $this->belongsTo(ChatUser::class);
+    // }
 }

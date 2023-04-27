@@ -31,14 +31,16 @@
         public function postMessage(Request $request)
         {
             $fields = $request->validate([
-                'description' => 'required|string',
+                'body' => 'required|string',
                 'image' => 'string',
                 'sender_id' => 'required|int',
                 'receiver_id' => 'required|int'
             ]);
             $message = Message::create([
-                'description' => $fields['description'],
+                'body' => $fields['body'],
                 'image' => empty($fields['image']) ? null : $fields['image']
+                // 'sender_id' => $fields['sender_id'],
+                // 'receiver_id' => $fields['receiver_id']
             ]);
     
             $user_message = Chatusermessage::create([
@@ -86,10 +88,11 @@
         }
     
     
-      public function getMessage(){
-        $arrayMessage = Message::all();
-        return response($arrayMessage,201);
-    }   
+   //get all
+   public function getMessage(){
+    $arrayMessage = Message::all();
+    return response($arrayMessage,201);
+}
     
     
     }

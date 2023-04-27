@@ -16,18 +16,18 @@ return new class extends Migration
             $table->string('body');
             $table->binary('image')->nullable();
             $table->timestamps();
-            $table->integer('receivers_id')->unsigned();
-            $table->integer('senders_id')->unsigned();
+            // $table->integer('receivers_id');
+            // $table->integer('senders_id');
 
-            $table->foreign('receivers_id')
-                    ->references('id')
-                    ->on('chatUsers')
-                    ->onCascade('delete');
+            // $table->foreign('receivers_id')
+            //         ->references('id')
+            //         ->on('chatUsers')
+            //         ->onCascade('delete');
 
-            $table->foreign('senders_id')
-                    ->references('id')
-                    ->on('chatUsers')
-                    ->onCascade('delete');
+            // $table->foreign('senders_id')
+            //         ->references('id')
+            //         ->on('chatUsers')
+            //         ->onCascade('delete');
         });
     }
 
