@@ -65,15 +65,15 @@
                         ->where('sender_id', $user_two_id)
                         ->where('receiver_id', $user_one_id);
                 })
-                ->orderBy('created_at')
+                ->orderBy('created_at', 'body')
                 ->get();
-    
+
             $messagesContentJSONArray = [];
             foreach ($messages as $message) {
     
                 $messagesContent = Message::
                     where('id', '=', $message['message_id'])
-                    ->orderBy('created_at')
+                    ->orderBy('created_at','body')
                     ->first();
     
                 $messagesContentJSON['sender_id'] = $message['sender_id'];

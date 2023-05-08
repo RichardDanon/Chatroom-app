@@ -35,7 +35,7 @@ Route::post('/users/login', [ChatUserController::class, 'userLogin']);
 
 Route::get('/messages', [MessageController::class, 'getMessage']);
 Route::get('/messages/{id}', [MessageController::class, 'getMessagesById']);
-Route::get('/messages/users/{user_one_id}&&{user_two_id}', [MessageController::class, 'getRecentMessages']) //gonna be the third controller 
+Route::get('/messages/users/{user_one_id}/{user_two_id}', [MessageController::class, 'getRecentMessages']) //gonna be the third controller 
 ->withoutMiddleware('throttle:api')
     ->middleware('throttle:500:1');
 Route::post('/messages', [MessageController::class, 'postMessage']);
