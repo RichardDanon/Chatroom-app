@@ -32,7 +32,7 @@
         {
             $fields = $request->validate([
                 'body' => 'required|string',
-                'image' => 'string',
+                'image' => 'image|nullable|max:1999',
                 'sender_id' => 'required|int',
                 'receiver_id' => 'required|int'
             ]);
